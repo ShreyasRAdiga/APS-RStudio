@@ -1,0 +1,91 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+```{r}
+#Shreyas_R_Adiga_231057011_Coding_ProblemSet1
+#23-08-2023
+```
+
+
+```{r}
+bats = read.csv('Datasets/bats.csv')
+str(bats)
+```
+
+```{r}
+catergorical_cols = c("Gene.1","Gene.2","Gene.3","Gene.4","Gene.5","Ebola")
+str(catergorical_cols)
+```
+
+```{r}
+bats[,catergorical_cols] = lapply(bats[,catergorical_cols], as.factor)
+str(bats)
+
+```
+```{r}
+#(a) What is the chance of a random bat carrying the Ebola virus?
+```
+
+```{r}
+sum(bats$Ebola == 'TRUE')
+
+```
+```{r}
+mean(bats$Ebola == 'TRUE') * 100
+```
+
+```{r}
+#(b) For each gene, calculate the likelihood that it is expressed in a random bat
+```
+
+```{r}
+mean(bats$Gene.1 == 'TRUE') *100
+```
+
+```{r}
+mean(bats$Gene.2 == 'TRUE') *100
+```
+
+```{r}
+mean(bats$Gene.3 == 'TRUE') *100
+```
+
+```{r}
+mean(bats$Gene.4 == 'TRUE') *100
+```
+
+```{r}
+mean(bats$Gene.5 == 'TRUE') *100
+```
+
+```{r}
+#(c) Is the presence or absence of any of the genes indicative of a random bat potentially carrying the Ebola virus
+```
+
+
+```{r}
+mean(bats[bats$Gene.1 == 'TRUE',]$Ebola == 'TRUE') * 100
+```
+
+```{r}
+mean(bats[bats$Gene.2 == 'TRUE',]$Ebola == 'TRUE') * 100
+```
+
+```{r}
+mean(bats[bats$Gene.3 == 'TRUE',]$Ebola == 'TRUE') * 100
+```
+
+```{r}
+mean(bats[bats$Gene.4 == 'TRUE',]$Ebola == 'TRUE') * 100
+```
+
+```{r}
+mean(bats[bats$Gene.5 == 'TRUE',]$Ebola == 'TRUE') * 100
+```
+
+```{r}
+# If GENE5 is present, it is most probable that ebola also exit
+```
+

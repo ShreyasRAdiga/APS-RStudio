@@ -1,0 +1,99 @@
+```{r}
+# import and store the dataset in data1
+dfpatient = read.csv('DataSets/emergency.csv')
+
+# display the data
+dfpatient
+
+```
+
+```{r}
+str(dfpatient)
+```
+```{r}
+#install.packages("contrast")
+library(contrast)
+# Create contrasts for the "Condition" feature
+condition_contrast=contrast(dfpatient$Condition, "contr.sum")
+
+# Create contrasts for the "Insurance" feature
+insurance_contrast=contrast(dfpatient$Insurance, "contr.sum")
+
+# Print the contrasts
+print(condition_contrast)
+print(insurance_contrast)
+```
+
+```{r}
+# Unique levels in the "Condition" feature
+unique_conditions = unique(dfpatient$Condition)
+
+# Unique levels in the "Insurance" feature
+unique_insurance = unique(dfpatient$Insurance)
+
+# Print the unique levels
+print(unique_conditions)
+print(unique_insurance)
+```
+```{r}
+library(dplyr)
+# Calculate the proportions of each condition
+condition_proportions <- dfpatient %>%
+  group_by(Condition) %>%
+  summarise(count = n()) %>%
+  mutate(proportion = count / sum(count))
+
+# Print the proportions
+print(condition_proportions)
+```
+
+```{r}
+library(dplyr)
+# Calculate the proportions of each insurance category
+insurance_proportions <- data %>%
+  group_by(Insurance) %>%
+  summarise(count = n()) %>%
+  mutate(proportion = count / sum(count))
+
+# Print the proportions
+print(insurance_proportions)
+```
+```{r}
+dfpatient = read.csv('DataSets/emergency.csv')
+levels(dfpatient$Condition)
+levels(dfpatient$Insurance)
+```
+
+```{r}
+categorical_cols = c("Condition","Insurance")
+str(categorical_cols)
+
+dfpatient[,categorical_cols] = lapply(dfpatient[,categorical_cols],as.factor)
+str(dfpatient)
+```
+```{r}
+dfpatient$Condition == 'serious'
+sum(dfpatient$Condition == 'serious')
+mean(dfpatient$Condition == 'serious')
+mean(dfpatient$Condition == 'serious')*100
+mean(dfpatient$Condition == 'good')*100
+mean(dfpatient$Condition == 'fair')*100
+```
+```{r}
+mean((dfpatient$Insurance == 'insured') & (dfpatient$Condition == 'serious')) *100
+```
+
+```{r}
+mean((dfpatient$Insurance == 'insured') | (dfpatient$Condition == 'serious'))*100
+```
+```{r}
+mean(dfpatient[dfpatient$Insurance == 'insured', ]$Condition == 'serious')*100
+
+mean((dfpatient$Insurance == 'insured') & (dfpatient$Condition == 'serious'))*100
+```
+
+```{r}
+mean(dfpatient[dfpatient$Condition == 'serious', ]$Insurance == 'insured')*100
+mean(dfpatient$Insurance == 'insured')*100
+```
+
